@@ -3,6 +3,12 @@ import time
 import random
 import pygame as pg
 
+## Sound ##
+pg.mixer.pre_init(44100, 32, 2, 1024)
+pg.mixer.init()
+pg.mixer.music.load("pacman_banging.wav")
+pg.mixer.music.play(loops=-1)
+
 ## Screen setup ##
 pg.init()
 screen = pg.display.set_mode((600,800))
@@ -87,7 +93,7 @@ while running:
             if tile == "#":
                 pg.draw.rect(screen, (20,20,220), pg.Rect(left+1, top+1, 30,30), 1)
             if tile == ".":
-                pg.draw.circle(screen,(220,220,0), (left+10,top+10),5)
+                pg.draw.circle(screen,(220,220,0), (left+15,top+15),5)
 
 
 
