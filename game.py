@@ -71,6 +71,11 @@ while running:
                 direction = "up"
             elif event.key == pg.K_s:
                 direction = "down"
+            elif event.key == pg.K_m:
+                if pg.mixer.music.get_busy():
+                    pg.mixer.music.stop()
+                else:
+                    pg.mixer.music.play(loops=-1)
             elif event.key == pg.K_ESCAPE:
                 running = False
 
