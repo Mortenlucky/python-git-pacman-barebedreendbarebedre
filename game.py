@@ -47,6 +47,16 @@ num_rows = len(level)
 num_cols = len(level[0])
 
 
+tiles = []
+for r, row in enumerate(level):
+    for c, tile in enumerate(row):
+        left = c*32
+        top = r*32
+        tiletemp = [left,top,tile]
+        tiles.append(tiletemp)
+
+for tile in tiles:
+    print(tile[2])
 
 
 ## Game Loop ##
@@ -89,6 +99,7 @@ while running:
     elif direction == "down":
         y = y + 5
 
+
     # Draw level #
     screen.fill((0,0,0))
     for r, row in enumerate(level):
@@ -99,6 +110,28 @@ while running:
                 pg.draw.rect(screen, (20,20,220), pg.Rect(left+1, top+1, 30,30), 1)
             if tile == ".":
                 pg.draw.circle(screen,(220,220,0), (left+15,top+15),5)
+            
+            #tiles.append(left)
+            #tiles.append(top)
+            
+        #print(tiles)
+        
+        for tile in tiles:
+            if tile[2] == "#":
+                #if tile[0] < x and x < tile[0]+30 or tile[0] < x+32 and x+32 < tile[0]+30:
+                ## Stole some code from Kristiyan <3
+                if x+30 > tile[0] and x < tile[0]+30:
+                    #if tile[1]+1 < y and y < tile[1]+30
+                    if y+30 > tile[1] and y < tile[1]+30:
+                        print("test",tick)
+                        if direction == "left":
+                            x = x + 5
+                        elif direction == "right":
+                            x = x - 5
+                        elif direction == "up":
+                            y = y + 5
+                        elif direction == "down":
+                            y = y - 5
 
 
 
