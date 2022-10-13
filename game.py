@@ -59,6 +59,7 @@ for tile in tiles:
     print(tile[2])
 
 turned = False
+points = 0
 
 ## Game Loop ##
 direction = "left"
@@ -112,14 +113,15 @@ while running:
 
     # Draw level #
     screen.fill((0,0,0))
-    for r, row in enumerate(level):
-        for c, tile in enumerate(row):
-            left = c*32
-            top = r*32
-            if tile == "#":
-                pg.draw.rect(screen, (20,20,220), pg.Rect(left+1, top+1, 30,30), 1)
-            if tile == ".":
-                pg.draw.circle(screen,(220,220,0), (left+15,top+15),5)
+    #for r, row in enumerate(level):
+        #for c, tile in enumerate(row):
+            #left = c*32
+            #top = r*32
+    for tile in tiles:
+        if tile[2] == "#":
+            pg.draw.rect(screen, (20,20,220), pg.Rect(tile[0]+1, tile[1]+1, 30,30), 1)
+        if tile[2] == ".":
+                pg.draw.circle(screen,(220,220,0), (tile[0]+15,tile[1]+15),5)
             
             #tiles.append(left)
             #tiles.append(top)
@@ -144,13 +146,27 @@ while running:
                             y = y - 5
                         if turned:
                             direction = olddirection
-                            print(olddirection)
+                            #print(olddirection)
                             turned = False
+
             else:
+                if tile[2] == ".":
+                    if x+15 > tile[0] and x < tile[0]+15:
+                        if y+15 > tile[1] and y < tile[1]+15:
+                            tile.pop(2)
+                            tile.append(" ")
+                            points = points + 1
+                            print("points: ",points)
+
                 if x+5 > tile[0] and x < tile[0]+5:
                     if y+5 > tile[1] and y < tile[1]+5:
                         olddirection = direction
                         turned = False
+
+    if x+30 < 0:
+        x = x + 352
+    if x > 352:
+        x = 0
 
 
 
