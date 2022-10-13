@@ -58,9 +58,11 @@ for r, row in enumerate(level):
 for tile in tiles:
     print(tile[2])
 
+turned = False
 
 ## Game Loop ##
-direction = None
+direction = "left"
+#olddirection = None
 running = True
 tick = 0
 while running:
@@ -74,13 +76,21 @@ while running:
 
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_a:
+                olddirection = direction
                 direction = "left"
+                turned = True
             elif event.key == pg.K_d:
+                olddirection = direction
                 direction = "right"
+                turned = True
             elif event.key == pg.K_w:
+                olddirection = direction
                 direction = "up"
+                turned = True
             elif event.key == pg.K_s:
+                olddirection = direction
                 direction = "down"
+                turned = True
             elif event.key == pg.K_m:
                 if pg.mixer.music.get_busy():
                     pg.mixer.music.stop()
@@ -120,10 +130,10 @@ while running:
             if tile[2] == "#":
                 #if tile[0] < x and x < tile[0]+30 or tile[0] < x+32 and x+32 < tile[0]+30:
                 ## Stole some code from Kristiyan <3
-                if x+30 > tile[0] and x < tile[0]+30:
+                if x+31 > tile[0]+2 and x < tile[0]+31:
                     #if tile[1]+1 < y and y < tile[1]+30
-                    if y+30 > tile[1] and y < tile[1]+30:
-                        print("test",tick)
+                    if y+31 > tile[1]+2 and y < tile[1]+31:
+                        #print("test",tick)
                         if direction == "left":
                             x = x + 5
                         elif direction == "right":
@@ -132,6 +142,15 @@ while running:
                             y = y + 5
                         elif direction == "down":
                             y = y - 5
+                        if turned:
+                            direction = olddirection
+                            print(olddirection)
+                            turned = False
+            else:
+                if x+5 > tile[0] and x < tile[0]+5:
+                    if y+5 > tile[1] and y < tile[1]+5:
+                        olddirection = direction
+                        turned = False
 
 
 
