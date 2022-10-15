@@ -122,46 +122,47 @@ while running:
             pg.draw.rect(screen, (20,20,220), pg.Rect(tile[0]+1, tile[1]+1, 30,30), 1)
         if tile[2] == ".":
                 pg.draw.circle(screen,(220,220,0), (tile[0]+15,tile[1]+15),5)
+    
             
             #tiles.append(left)
             #tiles.append(top)
             
         #print(tiles)
         
-        for tile in tiles:
-            if tile[2] == "#":
-                #if tile[0] < x and x < tile[0]+30 or tile[0] < x+32 and x+32 < tile[0]+30:
-                ## Stole some code from Kristiyan <3
-                if x+31 > tile[0]+2 and x < tile[0]+31:
-                    #if tile[1]+1 < y and y < tile[1]+30
-                    if y+31 > tile[1]+2 and y < tile[1]+31:
-                        #print("test",tick)
-                        if direction == "left":
-                            x = x + 5
-                        elif direction == "right":
-                            x = x - 5
-                        elif direction == "up":
-                            y = y + 5
-                        elif direction == "down":
-                            y = y - 5
-                        if turned:
-                            direction = olddirection
-                            #print(olddirection)
-                            turned = False
-
-            else:
-                if tile[2] == ".":
-                    if x+15 > tile[0] and x < tile[0]+15:
-                        if y+15 > tile[1] and y < tile[1]+15:
-                            tile.pop(2)
-                            tile.append(" ")
-                            points = points + 1
-                            print("points: ",points)
-
-                if x+5 > tile[0] and x < tile[0]+5:
-                    if y+5 > tile[1] and y < tile[1]+5:
-                        olddirection = direction
+    for tile in tiles:
+        if tile[2] == "#":
+            #if tile[0] < x and x < tile[0]+30 or tile[0] < x+32 and x+32 < tile[0]+30:
+            ## Stole some code from Kristiyan <3
+            if x+31 > tile[0]+2 and x < tile[0]+31:
+                #if tile[1]+1 < y and y < tile[1]+30
+                if y+31 > tile[1]+2 and y < tile[1]+31:
+                    #print("test",tick)
+                    if direction == "left":
+                        x = x + 5
+                    elif direction == "right":
+                        x = x - 5
+                    elif direction == "up":
+                        y = y + 5
+                    elif direction == "down":
+                        y = y - 5
+                    if turned:
+                        direction = olddirection
+                        #print(olddirection)
                         turned = False
+
+        else:
+            if tile[2] == ".":
+                if x+15 > tile[0] and x < tile[0]+15:
+                    if y+15 > tile[1] and y < tile[1]+15:
+                        tile.pop(2)
+                        tile.append(" ")
+                        points = points + 1
+                        print("points: ",points)
+
+            if x+5 > tile[0] and x < tile[0]+5:
+                if y+5 > tile[1] and y < tile[1]+5:
+                    olddirection = direction
+                    turned = False
 
     if x+30 < 0:
         x = x + 352
