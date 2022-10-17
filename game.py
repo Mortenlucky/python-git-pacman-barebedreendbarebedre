@@ -126,9 +126,10 @@ while running:
             
             #tiles.append(left)
             #tiles.append(top)
-            
+
         #print(tiles)
-        
+
+    # Collision    
     for tile in tiles:
         if tile[2] == "#":
             #if tile[0] < x and x < tile[0]+30 or tile[0] < x+32 and x+32 < tile[0]+30:
@@ -156,7 +157,7 @@ while running:
                     if y+15 > tile[1] and y < tile[1]+15:
                         tile.pop(2)
                         tile.append(" ")
-                        points = points + 1
+                        points = points + (100 - (int(tick/100)*10))
                         print("points: ",points)
 
             if x+5 > tile[0] and x < tile[0]+5:
@@ -164,11 +165,17 @@ while running:
                     olddirection = direction
                     turned = False
 
+    # Leaving Map
     if x+30 < 0:
         x = x + 352
     if x > 352:
         x = 0
 
+    # Draw Score
+    font = pg.font.SysFont("arial", 32)
+    score = font.render(f"Points: {points}", True, (255,255,255))
+
+    screen.blit(score, (5,482))
 
 
     # Draw pacman#
